@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: veypass-backend
+    env: docker
+    region: oregon
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true

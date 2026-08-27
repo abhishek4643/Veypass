@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+python-jose[cryptography]
+qrcode
+pillow
+passlib[bcrypt]
+scikit-learn
+pandas
+sqlalchemy
+psycopg2-binary
+pytest
+locust
+python-dotenv
