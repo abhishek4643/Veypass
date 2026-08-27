@@ -17,7 +17,10 @@ import auth
 from database import engine, get_db
 from pricing import compute_dynamic_price
 
-models.Base.metadata.create_all(bind=engine)
+try:
+    models.Base.metadata.create_all(bind=engine)
+except Exception as e:
+    print(f"Warning: Database initialization failed: {e}")
 
 app = FastAPI(title="Veypass API")
 
