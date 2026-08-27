@@ -12,3 +12,6 @@ psycopg2-binary
 pytest
 locust
 python-dotenv
+
+email-validator
+pydantic[email]
