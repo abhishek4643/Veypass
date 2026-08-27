@@ -1,6 +1,4 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/abhishek4643/Veypass/main/frontend/public/icons.svg" alt="Vegpass Logo" width="100"/>
-  <br/>
   <h1>VEGPASS</h1>
   <strong>Next-Generation Transit Automation Platform</strong>
   <br/><br/>
