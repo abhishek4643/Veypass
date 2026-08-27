@@ -1,94 +1,94 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/abhishek4643/Veypass/main/frontend/public/icons.svg" alt="Vegpass Logo" width="100"/>
   <br/>
-  <h1>🎟️ VEGPASS</h1>
-  <strong>Next-Generation Cloud-Based Transit Booking Platform</strong>
+  <h1>VEGPASS</h1>
+  <strong>Next-Generation Transit Automation Platform</strong>
   <br/><br/>
-  <i>A highly scalable, beautifully designed bus pass system engineered to prevent ticket fraud, automate dynamic pricing, and deliver a seamless passenger experience.</i>
+  <i>An enterprise-grade, digitally integrated transit ecosystem engineered to eliminate ticket fraud, optimize seat occupancy via Machine Learning, and streamline the passenger lifecycle.</i>
   <br/><br/>
-
-  <p>
-    <a href="#features">Features</a> •
-    <a href="#architecture">Architecture</a> •
-    <a href="#tech-stack">Tech Stack</a> •
-    <a href="#getting-started">Getting Started</a>
-  </p>
+  <a href="#core-architecture">Architecture</a> •
+  <a href="#platform-capabilities">Capabilities</a> •
+  <a href="#technology-stack">Technology Stack</a> •
+  <a href="#deployment--setup">Setup</a>
 </div>
 
 ---
 
-## 🚀 The Vision
+## Core Architecture
 
-Traditional bus ticketing systems are plagued by lost paper tickets, ticket theft, manual verification bottlenecks, and static, inefficient pricing models. 
+Vegpass transitions legacy bus ticketing systems into a secure, stateless, cloud-native application.
 
-**Vegpass** solves this by completely digitizing the transit experience. By combining a highly responsive React frontend, a high-performance Python FastAPI backend, and an integrated **Machine Learning Dynamic Pricing Model**, Vegpass brings modern cloud infrastructure to daily commuting.
-
-## ✨ Key Features
-
-- 📱 **Offline-Ready Digital E-Tickets**: Secure, digitally signed QR codes that act as your boarding pass. Passengers can scan their tickets from any device, completely eliminating ticket loss and theft.
-- 🧠 **AI-Powered Dynamic Pricing**: Integrates a Scikit-Learn Machine Learning model (`pricing_model.joblib`) to intelligently adjust ticket prices based on route distance, time of booking, and real-time demand.
-- 🚄 **High-Performance Search & Booking**: Lightning-fast route discovery and interactive UI seat selection powered by React and Framer Motion.
-- ☁️ **Cloud-Native Scalability**: Built to handle high traffic bursts. Database operations are ORM-managed (SQLAlchemy) and instantly compatible with Cloud PostgreSQL (Supabase).
-- 🛡️ **Military-Grade Security**: JWT-based stateless authentication and Bcrypt password hashing protect user data and ensure ticket integrity.
+### The Passenger Flow
+1. **Search & Intelligence:** The passenger queries routes. The FastAPI backend cross-references active schedules with a pre-trained Scikit-Learn Machine Learning model to calculate dynamic pricing based on realtime factors.
+2. **Interactive Booking:** The React client renders an interactive 3D bus layout (via Framer Motion), allowing precise seat selection with instant visual feedback.
+3. **Stateless Ticketing:** Upon booking, a JSON Web Token (JWT) is generated and embedded directly into a cryptographic QR Code. This QR code acts as a decentralized boarding pass.
+4. **Offline Verification:** Conductors can scan the passenger's QR Code ticket offline; the ticket contains all necessary payload data to securely verify the passenger without relying on fragile network connections.
 
 ---
 
-## 🛠️ Tech Stack
+## Platform Capabilities
 
-### Frontend (Client)
-- **React 18** & **Vite**
-- **Tailwind CSS** (Utility-first styling)
-- **Framer Motion** (Cinematic UI interactions)
-- **Axios**, **React Router DOM**, & **Lucide Icons**
-- **qrcode.react** (Client-side QR generation)
+### Intelligent Ticket Cryptography
+Traditional systems rely heavily on paper or easily forged screenshots. Vegpass generates dynamic QR codes that encrypt the Booking ID, Route, and Passenger information. The Conductor scanning module verifies the ticket signature locally, preventing any form of ticket duplication or theft.
 
-### Backend (Server)
-- **Python 3** & **FastAPI** (High-performance Async APIs)
-- **SQLAlchemy** (Robust Object Relational Mapping)
-- **Supabase (PostgreSQL)** (Cloud-hosted relational database)
-- **Scikit-Learn** & **Joblib** (Machine Learning integration)
-- **PyJWT** & **Passlib** (Authentication & Cryptography)
+### Algorithmic Dynamic Pricing
+Static pricing leads to lost revenue on high-demand routes. Vegpass integrates a dedicated `pricing_model.joblib` data pipeline. Prices dynamically scale based on:
+- Distance and journey duration
+- Proximity to departure time
+- Current seat occupancy metrics
+
+### High-Fidelity User Experience
+The user interface avoids traditional, clunky multi-step forms. It utilizes React-driven single-page architecture with localized state management. Animations are engineered to provide cinematic feedback during critical actions like seat selection and final payment processing.
 
 ---
 
-## 💻 Getting Started (Local Development)
+## Technology Stack
 
-Vegpass is designed to be incredibly easy to spin up locally. 
+### Client Architecture (Frontend)
+- **Framework:** React 18 & Vite
+- **Styling:** Tailwind CSS (Utility-first)
+- **State & Routing:** React Router DOM
+- **Animations:** Framer Motion
+- **Cryptography:** qrcode.react (Client-side localized generation)
 
-### 1. Backend Setup
+### Server Architecture (Backend)
+- **Core Framework:** Python 3 & FastAPI
+- **Data Modeling:** SQLAlchemy ORM & Pydantic
+- **Database Engine:** PostgreSQL (Supabase Cloud-ready)
+- **Machine Learning Engine:** Scikit-Learn & Joblib
+- **Security:** PyJWT (Tokenization) & Passlib (Bcrypt Hashing)
+
+---
+
+## Deployment & Setup
+
+The system is configured to decouple the frontend client from the backend API, allowing independent scaling.
+
+### Local Initialization
+
+**1. Backend Environment**
 ```bash
 cd backend
 python -m venv venv
-venv\Scripts\activate  # (Windows) or source venv/bin/activate (Mac/Linux)
+# Activate virtual environment: venv\Scripts\activate (Windows)
 pip install -r requirements.txt
 ```
-*Create a `.env` file in the backend directory:*
-```env
-DATABASE_URL="sqlite:///./veypass.db" # Or your Supabase PostgreSQL URL
-SECRET_KEY="yoursupersecretkey"
-```
-*Start the server:*
+Create a `.env` file containing your Supabase PostgreSQL connection string and Secret Key. Start the high-performance ASGI server:
 ```bash
-python seed.py # (Optional: Seeds the database with sample routes)
+python seed.py # (Optional: Initializes Database Schema)
 uvicorn main:app --host 0.0.0.0 --port 10000
 ```
 
-### 2. Frontend Setup
+**2. Frontend Environment**
 ```bash
 cd frontend
 npm install
 ```
-*Create a `.env` file in the frontend directory:*
+Create a `.env` file to map the client to the API:
 ```env
 VITE_API_URL="http://127.0.0.1:10000/api"
 ```
-*Start the UI:*
+Initiate the Vite development server:
 ```bash
 npm run dev
 ```
-
----
-
-<div align="center">
-  <i>Built with ❤️ for the Hackathon.</i>
-</div>
